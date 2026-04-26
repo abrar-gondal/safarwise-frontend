@@ -1,5 +1,6 @@
 export interface Package {
   id: number;
+  _id?: string
   name: string;
   destination: string;
   duration: string;

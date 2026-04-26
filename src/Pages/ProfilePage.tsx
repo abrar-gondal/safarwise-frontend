@@ -68,7 +68,7 @@ export default function ProfilePage() {
     if (!user) return;
     setBookingsLoading(true);
     getMyBookings()
-      .then(res => {
+      .then((res:any)=> {
         const data = res.data.bookings || res.data.data || res.data || [];
         setBookings(Array.isArray(data) ? data : []);
         setBookingsLoading(false);

@@ -1,7 +1,7 @@
 import logoImg from '../assets/logo.png';
 import { useState } from 'react';
 import { useApp } from '../AppContext';
-import axios from 'axios';
+import api from '../api';
 
 type Step = 'email' | 'otp' | 'newpassword' | 'success';
 export default function ForgotPasswordPage() {
@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
     if (!email) { setError('Please enter your email.'); return; }
     setLoading(true);
     try {
-      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/forgot-password', { email });
+      await api.post('/auth/forgot-password', { email });
       setStep('otp');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Something went wrong.');
@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
     if (otp.length !== 6) { setError('Please enter the 6-digit OTP.'); return; }
     setLoading(true);
     try {
-      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/verify-otp', { email, token: otp });
+      await api.post('/auth/verify-otp', { email, token: otp });
       setStep('newpassword');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Incorrect OTP. Please try again.');
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
     if (password !== confirm) { setError('Passwords do not match.'); return; }
     setLoading(true);
     try {
-      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/reset-password', {
+      await api.post('/auth/reset-password', {
         email,
         token: otp,
         password,

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useApp } from '../AppContext';
-import axios from 'axios';
+import api from '../api';
 
 export default function ResetPasswordPage() {
   const { navigate } = useApp();
@@ -51,7 +51,7 @@ export default function ResetPasswordPage() {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/reset-password', {
+      await api.post('/auth/reset-password', {
         email,
         token,
         password,

@@ -34,8 +34,6 @@ export default function PackageDetailPage() {
     navigate('packages');
     return null;
   }
-  const totalPKR = pkg.price * formTravelers;
-
   const submitInquiry = async () => {
     setError('');
     if (!formName)  { setError('Please enter your full name.'); return; }
@@ -62,7 +60,7 @@ export default function PackageDetailPage() {
           message: `Package: ${pkg.name}\nDate: ${formDate}\nTravelers: ${formTravelers}\nTotal: PKR ${(pkg.price * formTravelers).toLocaleString()}\nPhone: ${formPhone}${formMsg ? '\nMessage: ' + formMsg : ''}`,
         });
       } catch {
-      setSent(true);}
+      }setSent(true);
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Failed to submit. Make sure you are logged in and backend is running.');
     } finally {

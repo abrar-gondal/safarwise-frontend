@@ -14,11 +14,6 @@ const CONTACT_ITEMS = [
   { icon: '📍', label: 'Office', value: 'Lahore, Pakistan' },
   { icon: '🕐', label: 'Hours', value: 'Monday to Sunday, 9:00 AM - 8:00 PM PKT' },
 ];
-const SOCIAL = [
-  { name: 'Facebook',  url: 'https://facebook.com/safarwise',   svg: '🇫' },
-  { name: 'Instagram', url: 'https://instagram.com/safarwise',  svg: '🇮' },
-  { name: 'YouTube',   url: 'https://youtube.com/@safarwise',   svg: '🇾' },
-];
 const FAQ_QUICK = [
   { q: 'How quickly do you respond?', a: 'Within 24 hours on business days. For urgent travel needs, call us directly.' },
   { q: 'Can I request a custom itinerary?', a: 'Absolutely just select "Custom Tour" in the subject and describe your dream trip.' },

@@ -15,7 +15,7 @@ const QUICK_REPLIES = [
 ];
 const getBotResponse = async (msg: string): Promise<string> => {
   try {
-    const res = await fetch('http://localhost:5001/chat', {
+    const res = await fetch('https://abrar00-safarwise-chatbot.hf.space/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: msg }),

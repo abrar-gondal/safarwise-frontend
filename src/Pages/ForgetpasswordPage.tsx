@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
     if (!email) { setError('Please enter your email.'); return; }
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/forgot-password', { email });
       setStep('otp');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Something went wrong.');
@@ -34,7 +34,7 @@ export default function ForgotPasswordPage() {
     if (otp.length !== 6) { setError('Please enter the 6-digit OTP.'); return; }
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/verify-otp', { email, token: otp });
+      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/verify-otp', { email, token: otp });
       setStep('newpassword');
     } catch (err: any) {
       setError(err?.response?.data?.message || 'Incorrect OTP. Please try again.');
@@ -49,7 +49,7 @@ export default function ForgotPasswordPage() {
     if (password !== confirm) { setError('Passwords do not match.'); return; }
     setLoading(true);
     try {
-      await axios.post('http://localhost:5000/api/auth/reset-password', {
+      await axios.post('https://safarwise-backend-production.up.railway.app/api/auth/reset-password', {
         email,
         token: otp,
         password,

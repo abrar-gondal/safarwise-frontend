@@ -11,8 +11,6 @@ const HeartNavIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill=
 const UserNavIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
 const ChatNavIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>;
 const LogoutIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>;
-const SaveIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>;
-
 const NAV_ITEMS_USER: { id: Tab; icon: JSX.Element; label: string }[] = [
   { id: 'bookings',  icon: <CalendarIcon />, label: 'My Bookings'  },
   { id: 'favorites', icon: <HeartNavIcon />, label: 'Favorites'    },
@@ -171,7 +169,7 @@ export default function ProfilePage() {
                   {bookingsLoading ? (
                     <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--earth-light)' }}>
                       <div style={{ marginBottom: '0.5rem' }}>Loading bookings...</div>
-                      <div style={{ fontSize: '0.72rem' }}>Make sure backend is running on port 5000</div>
+                      {/* <div style={{ fontSize: '0.72rem' }}>Make sure backend is running on port 5000</div> */}
                     </div>
                   ) : bookings.length === 0 ? (
                     <div className="empty-state">
@@ -214,10 +212,29 @@ export default function ProfilePage() {
                                 {b.bookingStatus?.charAt(0).toUpperCase() + b.bookingStatus?.slice(1)}
                               </span>
                               {b.bookingStatus === 'cancelled' && (
-                                <div style={{ marginTop: '0.4rem', fontSize: '0.7rem', color: 'var(--earth-light)', fontStyle: 'italic' }}>
-                                  Will auto-hide on next visit
-                                </div>
-                              )}
+                              <div style={{ marginTop: '0.4rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.3rem' }}>
+                              <div style={{ fontSize: '0.7rem', color: 'var(--earth-light)', fontStyle: 'italic' }}>
+                               Will auto-hide on next visit
+                              </div>
+                              <button
+                              onClick={() => {
+                              markCancelledSeen(b._id);
+                              dismissBooking(b._id);
+                              }  }
+                            style={{
+                            fontSize: '0.68rem',
+                            color: '#C0392B',
+                            background: 'rgba(192,57,43,0.08)',
+                            border: '1px solid rgba(192,57,43,0.2)',
+                            borderRadius: 6,
+                            padding: '0.2rem 0.6rem',
+                            cursor: 'pointer',
+                           }}
+                             >
+                           Dismiss
+                           </button>
+                              </div>
+                                    )}
                             </div>
                           </div>
                         </div>
